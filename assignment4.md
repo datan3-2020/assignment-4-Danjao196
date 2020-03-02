@@ -57,8 +57,7 @@ Reproduce the following graphs as close as you can. For each graph,
 write two sentences (not more\!) describing its main message.  
 \# remember 2 sentences per graph describing its main message
 
-1.  Univariate distribution (20 points). \# think this is just a one
-    variable thing and you rename label for count
+1.  Univariate distribution (20 points). 
     
     ``` r
     ggplot(Data, mapping = aes(x = h_payn_dv)) +
