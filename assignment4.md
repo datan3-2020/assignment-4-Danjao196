@@ -55,7 +55,7 @@ this; you only need to change the file paths.
 
 Reproduce the following graphs as close as you can. For each graph,
 write two sentences (not more\!) describing its main message.  
-\# remember 2 sentences per graph describing its main message
+
 
 1.  Univariate distribution (20 points). 
     
