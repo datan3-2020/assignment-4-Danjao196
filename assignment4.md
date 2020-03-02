@@ -68,6 +68,8 @@ write two sentences (not more\!) describing its main message.
     
     ![](assignment4_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
+The message of this graph is that net monthly pay is clustered around the ~1300 pounds mark. After that it tails off quite fast with a small bump again at 5500 pounds.
+
 2.  Line chart (20 points). The lines show the non-parametric
     association between age and monthly earnings for men and women.
     
