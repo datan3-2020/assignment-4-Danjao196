@@ -54,11 +54,13 @@ this; you only need to change the file paths.
     ```
 
 Reproduce the following graphs as close as you can. For each graph,
-write two sentences (not more\!) describing its main message.
+write two sentences (not more\!) describing its main message.  
+\# remember 2 sentences per graph describing its main message
 
-# 1\. Univariate distribution (20 points).
-
-    ```r
+1.  Univariate distribution (20 points). \# think this is just a one
+    variable thing and you rename label for count
+    
+    ``` r
     ggplot(Data, mapping = aes(x = h_payn_dv)) +
     geom_freqpoly() +
     xlab("Net Monthly Pay") +
@@ -67,13 +69,10 @@ write two sentences (not more\!) describing its main message.
     
     ![](assignment4_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-The message of this graph is that net monthly pay is clustered around
-the \~1300 pounds mark. After that it tails off quite fast with a small
-bump again at 5500 pounds.
-
-# 2\. Line chart (20 points). The lines show the non-parametric association between age and monthly earnings for men and women.
-
-    ```r
+2.  Line chart (20 points). The lines show the non-parametric
+    association between age and monthly earnings for men and women.
+    
+    ``` r
     ggplot(Data, mapping = aes(x = h_age_dv, y = h_payn_dv,linetype = sex_dv)) +
     geom_smooth(color = "black") +
     xlab("Age") +
@@ -90,24 +89,24 @@ the gap starts to widen.
 
 # 3\. Faceted bar chart (20 points).
 
-    ```r
-    bysex <- Data %>%
-      group_by(sex_dv, placeBorn) %>%
-      summarise(
+``` r
+bysex <- Data %>%
+  group_by(sex_dv, placeBorn) %>%
+  summarise(
     medianwage = median(h_payn_dv, na.rm = TRUE)) %>% 
     filter(!is.na(sex_dv)) %>%
     filter(!is.na(placeBorn))
     
-     bysex %>%   
+ bysex %>%   
     ggplot(aes(x = sex_dv, y = medianwage)) +
-      geom_bar(stat = "identity") +
-      facet_wrap(~ placeBorn, ncol = 3) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ placeBorn, ncol = 3) +
     ylim(0,2000) +
     xlab("Sex") +
     ylab("Median Monthly Net Pay")
-    ```
-    
-    ![](assignment4_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+```
+
+![](assignment4_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 These charts show that regardless of place of birth that men on average
 have a higher median monthly net pay. The largest differnece in pay
@@ -116,22 +115,22 @@ families.
 
 # 4\. Heat map (20 points).
 
-    ```r
-    byregion <- Data %>%
-      group_by(h_gor_dv, placeBorn) %>%
-      summarise(
+``` r
+byregion <- Data %>%
+  group_by(h_gor_dv, placeBorn) %>%
+  summarise(
     meanage = mean(h_age_dv, na.rm = TRUE)) %>% 
     filter(!is.na(h_gor_dv)) %>%
     filter(!is.na(placeBorn)) 
-     
-     byregion %>%  ggplot( aes(x = h_gor_dv, y = placeBorn, fill = meanage)) +
+ 
+ byregion %>%  ggplot( aes(x = h_gor_dv, y = placeBorn, fill = meanage)) +
     geom_tile() +
     xlab("Region")+
     ylab("Country of Birth") +
     theme(axis.text.x = element_text(angle = 90))
-    ```
-    
-    ![](assignment4_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+```
+
+![](assignment4_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 This heat map is designed to show the mean age of residents of each
 region of the UK depending on their Country of birth. The chart shows
@@ -142,23 +141,23 @@ particulary in Northern Ireland.
 
 # 5\. Population pyramid (20 points).
 
-    ```r
-     #group by age and then by sex
+``` r
+ #group by age and then by sex
     # then do a count of each age group by sex. then should be about to do it
     
-    population <- Data %>%  group_by(sex_dv,h_age_dv) %>% 
+population <- Data %>%  group_by(sex_dv,h_age_dv) %>% 
     count(h_age_dv, sex_dv)   
     
-    population$n <- ifelse(population$sex_dv == "male", -1*population$n, population$n)
+population$n <- ifelse(population$sex_dv == "male", -1*population$n, population$n)
     
-     ggplot(population, aes(x = h_age_dv, y = n, fill = sex_dv)) + 
-      geom_bar(data = subset(population, sex_dv == "female"), stat = "identity",      colour = "red") +
-      geom_bar(data = subset(population, sex_dv == "male"), stat = "identity", colour = "blue") + 
-      coord_flip() +
-      xlab("Age")
-    ```
-    
-    ![](assignment4_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+ ggplot(population, aes(x = h_age_dv, y = n, fill = sex_dv)) + 
+  geom_bar(data = subset(population, sex_dv == "female"), stat = "identity",      colour = "red") +
+  geom_bar(data = subset(population, sex_dv == "male"), stat = "identity", colour = "blue") + 
+  coord_flip() +
+  xlab("Age")
+```
+
+![](assignment4_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 This population pyramid shows that the number of people in age group
 starts quite high at 0-25, decreases a bit (possibly due to
